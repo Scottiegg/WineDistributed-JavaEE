@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Search Wines</title>
+        <h:outputStylesheet library="css" name="TableCSS.css" />
+    </h:head>
+    <h:body>
+        <h1>Search for wines</h1>
+        <h3>Search wines by the criteria below:</h3>
+
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Name:"/>
+                <h:inputText title="Name" maxlength="30" value="#{winesManagedBean.name}"/>
+
+                <h:outputLabel value="Variety:"/>
+                <h:inputText title="Variety" maxlength="30" value="#{winesManagedBean.variety}"/>
+
+                <h:outputLabel value="Vineyard:"/>
+                <h:inputText title="Vineyard" maxlength="30" value="#{winesManagedBean.vineyard}"/>
+
+                <h:outputLabel value="Vintage:"/>
+                <h:inputText title="Vintage" maxlength="30" value="#{winesManagedBean.vintage}"/>
+
+                <h:outputLabel value="Country of Origin:"/>
+                <h:inputText title="Country_origin" maxlength="30" value="#{winesManagedBean.country_origin}"/>
+            </h:panelGrid>
+            <h:commandButton value="Seach" action="#{winesManagedBean.searchWines()}"/>
+            <h:commandButton value="Main menu" action="mainpage.xhtml"/>
+
+            <p>
+                <h:dataTable value="#{winesManagedBean.wines}" var="item" styleClass="table" cellpadding="5">
+                    <h:column>
+                        <f:facet name="header">Name of Wine</f:facet>
+                        <h:outputText value="#{item.wine.name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Variety</f:facet>
+                        <h:outputText value="#{item.wine.variety}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Vineyard</f:facet>
+                        <h:outputText value="#{item.wine.vineyard}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Vintage</f:facet>
+                        <h:outputText value="#{item.wine.vintage}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Region</f:facet>
+                        <h:outputText value="#{item.wine.region}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">State of Origin</f:facet>
+                        <h:outputText value="#{item.wine.stateOrigin}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Country of Origin</f:facet>
+                        <h:outputText value="#{item.wine.countryOrigin}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Price</f:facet>
+                        $<h:outputText value="#{item.currentPrice}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Qty Left</f:facet>
+                        <h:outputText value="#{item.stockQty}" binding="#{stockQty}"/>
+                    </h:column>
+                    <h:column>
+                        <h:commandButton value="Add to Cart" action="#{winesManagedBean.addToCart(item)}"/>
+                    </h:column>
+                </h:dataTable>
+            </p>
+        </h:form>
+    </h:body>
+</html>
+
